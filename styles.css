@@ -1,0 +1,338 @@
+@charset "ISO-8859-1";
+
+body {
+	height: 100%;
+    width: 100%;
+    background-color: #202020;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+#main-container {
+	background-color: #202020;
+	height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#canvas {
+    position: relative;
+	overflow: hidden;
+	width: 1530px;
+    height: 710px;
+}
+
+.main-container-for-game {
+	background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.table {
+	background-image: url('../images/Untitled presentation.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    height: 84%;
+    margin: 0 auto;
+    height: 710px;
+}
+
+.player-seat{
+	position: absolute;
+	height: 10.5%;
+	width: 10%;
+	display: inline-block;
+	border: dashed 1px grey;
+}
+
+.player-seat:hover {
+	border: solid 2px white;
+}
+
+.options {
+	background-image: url('../images/options_button.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    filter: invert(1);
+	position: absolute;
+	height: 6%;
+	width: 2.7%;
+	display: inline-block;
+	border: none;
+	top: 2%;
+	left: 1%;
+	z-index: 10;
+}
+
+.options:hover {
+	border: solid 1px transparent;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+ 
+.notices {
+	position: absolute;
+	height: 14%;
+	width: 20%;
+	display: inline-block;
+	border: solid 1px grey;
+	bottom: 2%;
+	left: 1%;
+}
+
+.player-text {
+	color: white;
+	top: -17%;
+	left: 3%;
+	position: absolute;
+}
+
+.player1:hover, .player2:hover, .player3:hover, .player4:hover, .player5:hover, .player6:hover, .player7:hover, .player8:hover, .player9:hover, .player10:hover {
+	cursor: pointer;
+}
+
+.player1 {
+	top: 9%;
+	left: 34%;
+}
+
+.player2 {
+	top: 9%;
+	left: 54%;
+}
+
+.player3 {
+	top: 20%;
+	left: 72%;
+}
+
+.player4 {
+	top: 45%;
+	left: 75%;
+}
+
+.player5 {
+	top: 70%;
+	left: 72%;
+}
+
+.player6 {
+	top: 78%;
+	left: 54%;	
+}
+
+.player7 {
+	top: 78%;
+	left: 34%;
+}
+
+.player8 {
+	top: 70%;
+	left: 16%;
+}
+
+.player9 {
+	top: 45%;
+	left: 13%;
+}
+
+.player10 {
+	top: 20%;
+	left: 16%;
+}
+
+.board-card1,.board-card2, .board-card3, .board-card4, .board-card5, .player1-card1, .player1-card2, 
+.player2-card1, .player2-card2, .player3-card1, .player3-card2, .player4-card1, .player4-card2, 
+.player5-card1, .player5-card2, .player6-card1, .player6-card2, .player7-card1, .player7-card2, 
+.player8-card1, .player8-card2, .player9-card1, .player9-card2, .player10-card1, .player10-card2 {
+	height: 9%;
+	width: 2.75%;
+	border: solid 1px white;
+	border-radius: 5%;
+	position: absolute;	
+}
+
+.player1-card1 {
+	top: 27%;
+	left: 35.5%;
+}
+
+.player1-card2 {
+	top: 27%;
+	left: 39%;
+}
+
+.player2-card1 {
+	top: 27%;
+	left: 55.5%;
+}
+
+.player2-card2 {
+	top: 27%;
+	left: 59%;
+}
+
+.player3-card1 {
+	top: 32%;
+	left: 64%;
+}
+
+.player3-card2 {
+	top: 32%;
+	left: 67.5%;
+}
+
+.player4-card1 {
+	top: 45%;
+	left: 67%;
+}
+
+.player4-card2 {
+	top: 45%;
+	left: 70.5%;
+}
+
+.player5-card1 {
+	top: 58%;
+	left: 64%;
+}
+
+.player5-card2 {
+	top: 58%;
+	left: 67.5%;
+}
+
+.player6-card1 {
+	top: 63%;
+	left: 55.5%;
+}
+
+.player6-card2 {
+	top: 63%;
+	left: 59%;
+}
+
+.player7-card1 {
+	top: 63%;
+	left: 35.5%;
+}
+
+.player7-card2 {
+	top: 63%;
+	left: 39%;
+}
+
+.player8-card1 {
+	top: 58%;
+	left: 27%;
+}
+
+.player8-card2 {
+	top: 58%;
+	left: 30.5%;
+}
+.player9-card1 {
+	top: 45%;
+	left: 24%;
+}
+
+.player9-card2 {
+	top: 45%;
+	left: 27.5%;
+}
+
+.player10-card1 {
+	top: 32%;
+	left: 27.0%;
+}
+
+.player10-card2 {
+	top: 32%;
+	left: 30.5%;
+}
+
+.board-card1 {
+	top: 45%;
+	left: 39%;
+}
+
+.board-card2 {
+	top: 45%;
+	left: 43%;
+}
+
+.board-card3 {
+	top: 45%;
+	left: 47%;
+}
+
+.board-card4 {
+	top: 45%;
+	left: 51%;
+}
+
+.board-card5 {
+	top: 45%;
+	left: 55%;
+}
+
+#option-dropdown {
+	position: absolute;
+	top: 1%;
+	left: .5%;
+	height: 25%;
+	width: 8%;
+	border: solid 1px grey;
+	background-color: #202020;
+	border-radius: 5%;
+	visibility: hidden;
+}
+
+.game-info {
+	height: 5%;
+	width: 7.5%;
+	top: 1%;
+	right: 2%;
+	border: solid 1px grey;
+	position: absolute;
+}
+
+.tip {
+	bottom: 1%;
+	right: 2%;
+	border: 1px solid grey;
+	border-radius: 10%;
+	position: absolute;
+	background-color: transparent;
+	color: white;
+	font-size: 20px;
+}
+
+.tip:hover { 
+	cursor: pointer;
+}
+
+.close-button {
+	position: absolute;
+	top: 1%;
+	right: 1%;
+}
+
+p {
+	color: #F0F9FF;
+	font-family: arial;
+	font-size: 20px;
+}
+
+li {
+	color: #F0F9FF;
+	font-family: arial;
+	font-size: 13px;
+}
