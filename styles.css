@@ -7,6 +7,7 @@ body {
     display: flex;
     justify-content: space-between;
     overflow: hidden;
+    zoom: unset;
 }
 
 #main-container {
@@ -51,40 +52,6 @@ body {
 
 .player-seat:hover {
 	border: solid 2px white;
-}
-
-.options {
-	background-image: url('../images/options_button.png');
-	background-size: contain;
-	background-repeat: no-repeat;
-    background-position: center;
-    background-color: transparent;
-    filter: invert(1);
-	position: absolute;
-	height: 6%;
-	width: 2.7%;
-	display: inline-block;
-	border: none;
-	top: 2%;
-	left: 1%;
-	z-index: 10;
-}
-
-.options:hover {
-	border: solid 1px transparent;
-	border-radius: 50%;
-	cursor: pointer;
-}
-
- 
-.notices {
-	position: absolute;
-	height: 14%;
-	width: 20%;
-	display: inline-block;
-	border: solid 1px grey;
-	bottom: 2%;
-	left: 1%;
 }
 
 .player-text {
@@ -292,7 +259,50 @@ body {
 	border: solid 1px grey;
 	background-color: #202020;
 	border-radius: 5%;
-	visibility: hidden;
+	opacity: 0%;
+	height: 40px;
+	width: 40px;
+	transition: height 2s, width 2s, opacity 2s;
+}
+
+#option-dropdown.open-click {
+	height: 150px;
+	width: 130px;
+	opacity: 100%;
+}
+
+.options {
+	background-image: url('../images/options_button.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    filter: invert(1);
+	position: absolute;
+	height: 6%;
+	width: 2.7%;
+	display: inline-block;
+	border: none;
+	top: 2%;
+	left: 1%;
+	z-index: 1;
+}
+
+.options:hover {
+	border: solid 1px transparent;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+ 
+.notices {
+	position: absolute;
+	height: 14%;
+	width: 20%;
+	display: inline-block;
+	border: solid 1px grey;
+	bottom: 2%;
+	left: 1%;
 }
 
 .game-info {
@@ -315,7 +325,7 @@ body {
 	font-size: 20px;
 }
 
-.tip:hover { 
+.tip:hover button:hover .options:hover { 
 	cursor: pointer;
 }
 
@@ -324,6 +334,7 @@ body {
 	top: 1%;
 	right: 1%;
 }
+
 
 p {
 	color: #F0F9FF;
