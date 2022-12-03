@@ -6,8 +6,12 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="styles/styles.css">
 <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@700&family=Rubik:wght@500&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="scripts/pageLoader.js"></script>
+<script type="text/javascript" src="scripts/button.js"></script>
+<script type="text/javascript" src="screenSize/button.js"></script>
 <title>Steel Rivets Poker</title>
 </head>
 <body>
@@ -51,10 +55,10 @@
 				</div>
 				<div class="notices"></div>
 				<button type="button" class="options"></button>
-				<div id="option-dropdown">
-					<button class="settings">Settings</button>
-					<button class="login">Login/Logout</button>
-					<button class="close-button">X</button>
+				<div class="option-dropdown">
+					<button class="settings inner-button">Settings</button>
+					<button class="login inner-button">Login/Logout</button>
+					<button class="close-button inner-button">X</button>
 				</div>
 				<div class="donation"></div>
 			</div>
