@@ -1,48 +1,55 @@
 @charset "ISO-8859-1";
 
 body {
-	height: 100%;
     width: 100%;
     margin: auto;
-    padding: auto;
     background-color: #202020;
-    display: flex;
-    justify-content: space-between;
+    display:flex; 
     overflow: hidden;
+    /*
+    display: block;*/
+    color: white;
+    font-family: 'Oxygen', san-serif;
 }
 
 #main-container {
 	background-color: #202020;
-	height: auto;
-    width: auto;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
+    margin: auto;
+    padding: auto;
 
 }
 
 #canvas {
     position: relative;
 	overflow: hidden;
-	width: 1530px;
-    height: 710px;
+	width: 100%;
 }
 
 .main-container-for-game {
 	background-size: cover;
-    height: 100%;
     width: 100%;
 }
 
 .table {
-	background-image: url('../images/Untitled presentation.jpg');
+	background-image: url('../images/poker-table.jpg');
     background-size: cover;
     background-position: center;
     position: relative;
     height: 84%;
     margin: 0 auto;
     height: 710px;
+}
+
+.table-image {
+    z-index: -1;
+    height: 750px;
+    margin: auto;
+    padding: auto;
 }
 
 .player-seat{
@@ -55,6 +62,7 @@ body {
 
 .player-seat:hover {
 	border: solid 2px white;
+	cursor: pointer;
 }
 
 .player-text {
@@ -62,10 +70,6 @@ body {
 	top: -17%;
 	left: 3%;
 	position: absolute;
-}
-
-.player1:hover, .player2:hover, .player3:hover, .player4:hover, .player5:hover, .player6:hover, .player7:hover, .player8:hover, .player9:hover, .player10:hover {
-	cursor: pointer;
 }
 
 .player1 {
@@ -116,6 +120,12 @@ body {
 .player10 {
 	top: 20%;
 	left: 16%;
+}
+
+.player1.activated,.player2.activated, .player3.activated, .player4.activated, .player5.activated, 
+.player6.activated, .player7.activated, .player8.activated, .player9.activated, .player10.activated {
+	background-color: #171717;
+	border: solid 2px black;
 }
 
 .board-card1,.board-card2, .board-card3, .board-card4, .board-card5, .player1-card1, .player1-card2, 
@@ -340,7 +350,7 @@ body {
 	font-size: 20px;
 }
 
-.tip:hover button:hover .options:hover { 
+.tip:hover, button:hover, .options:hover { 
 	cursor: pointer;
 }
 
@@ -350,10 +360,20 @@ body {
 	right: 1%;
 }
 
+.current-call {
+	justify-content: center;
+	align-items: center;
+	height: 3.5%;
+	width: 7%;
+	border: 1px solid white;
+	position: relative;
+	left: 45%;
+	top: 40%;
+}
 
-p {
-	color: #F0F9FF;
-	font-family: arial;
+.current-call-text {
+	margin-top: auto;
+	color: white;
 	font-size: 20px;
 }
 
@@ -361,4 +381,23 @@ li {
 	color: #F0F9FF;
 	font-family: arial;
 	font-size: 13px;
+}
+
+.card-images {
+	border: 1px solid black;
+	border-radius: 5%;
+	position: absolute;
+	top: 27%;
+	left: 35.5%;
+	width: 2.75%; 
+	height: 9%;
+}
+
+.card-image {
+	width: 43px;
+	height: 63px;
+}
+
+.test {
+	color: white;
 }
