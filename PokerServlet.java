@@ -12,37 +12,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class FirstServletProject
+ * Servlet implementation class PokerServlet
  */
-@WebServlet(description = "My First Servlet", urlPatterns = { "/FirstServletProject" , "/FirstServletProject.do"}, initParams = {@WebInitParam(name="id",value="1"),@WebInitParam(name="name",value="pankaj")})
+@WebServlet(description = "My First Servlet", urlPatterns = { "/PokerServlet" , "/PokerServlet.do"}, initParams = {@WebInitParam(name="id",value="1"),@WebInitParam(name="name",value="pankaj")})
 
-public class FirstServletProject extends HttpServlet {
+public class PokerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static final String HTML_START="<html><body>";
 	public static final String HTML_END="</body></html>";
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public FirstServletProject() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
+    
+	protected void getGameInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+	}
+	
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		Date date = new Date();
-		out.println(HTML_START + "<h2>Hi There!</h2><br/><h3>Date="+date +"</h3>"+HTML_END);
+		getGameInfo(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		getGameInfo(request, response);
 	}
 
 }

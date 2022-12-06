@@ -1,4 +1,20 @@
 $(document).ready(function() {
+	$(document).ready(function(){
+	$(".table").css("height", $(window).height());
+	$(".table").css("width", $(window).width());
+	
+	$("#canvas").css("height", $(window).height());
+	$("#canvas").css("width", $(window).width());
+	
+	$(".main-container-for-game").css("height", $(window).height());
+	$(".main-container-for-game").css("width", $(window).width());
+	
+	$("#main-container").css("height", $(window).height());
+	$("#main-container").css("width", $(window).width());
+	
+	$(".table-image").css("height", $(window).height());
+	$(".table-image").css("width", $(window).width());
+	});
 	var width1 = $(window).width();
 	var height1 = $(window).height();
 	$(window).resize(function() {
@@ -22,19 +38,19 @@ $(document).ready(function() {
 		}
 		if(height != height1) {
 			$(".table").css("height", height);
-			$(".table").css("width", height*2);
+			$(".table").css("width", (height*2)/.94);
 			
-			$("#canvas").css("height", .94*height);
-			$("#canvas").css("width", height*2);
+			$("#canvas").css("height", height);
+			$("#canvas").css("width", (height*2)/.94);
 			
 			$(".main-container-for-game").css("height", height);
-			$(".main-container-for-game").css("width", height*2);
+			$(".main-container-for-game").css("width", (height*2)/.94);
 			
 			$("#main-container").css("height", height);
-			$("#main-container").css("width", height*2);
+			$("#main-container").css("width", (height*2)/.94);
 			
 			$(".table-image").css("height", height);
-			$(".table-image").css("width", height*2);
+			$(".table-image").css("width", (height*2)/.94);
 		}
 		
 		width1 = width;
