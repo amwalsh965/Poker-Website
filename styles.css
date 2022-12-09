@@ -57,6 +57,7 @@ body {
 	width: 10%;
 	display: inline-block;
 	border: dashed 1px grey;
+	border-radius: 10px;
 }
 
 .player-seat:hover {
@@ -134,7 +135,6 @@ body {
 	height: 9%;
 	width: 2.75%;
 	border: solid 1px white;
-	border-radius: 5%;
 	position: absolute;	
 }
 
@@ -405,7 +405,29 @@ li {
 }
 
 .test {
+	width: 15%;
+	height: 6%;
+	position: absolute;
+	right: 2%;
+	bottom: 14%;
+	border: 3px solid black;
+	background-color: #3F4952;
+	color: black;
+	font-size: 20px;
+	border-radius: 10px;
+}
+
+.test1 {
+	width: 15%;
+	height: 6%;
+	position: absolute;
+	right: 2%;
+	bottom: 25%;
+	border: 3px solid black;
+	background-color: #3F4952;
 	color: white;
+	font-size: 20px;
+	border-radius: 10px;
 }
 
 
@@ -495,3 +517,21 @@ create-settings-button {
 .start-button:hover {
 	border: 3px solid white;
 }
+
+.game-info-settings {
+	display: block;
+}
+
+.game-settings-settings {
+	display: none;
+}
+
+.special-settings {
+	display: none;
+}
+
+.settings-text {
+	padding-left: 1%;
+	
+}
+
