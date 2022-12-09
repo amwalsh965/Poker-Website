@@ -75,20 +75,31 @@ $(document).ready(function(){
 	$(".create-game-settings-button1").click(function() {
 		var text = $(".create-game-settings-button1").html();
 		$(".main-settings-heading").text(text);
+		$(".game-info-settings").css("display", "block");
+		$(".game-settings-settings").css("display", "none");
+		$(".special-settings").css("display", "none");
 	});
 	
 	$(".create-game-settings-button2").click(function() {
 		var text = $(".create-game-settings-button2").html();
 		$(".main-settings-heading").text(text);
+		$(".game-info-settings").css("display", "none");
+		$(".game-settings-settings").css("display", "block");
+		$(".special-settings").css("display", "none");
 	});
 	
 	$(".create-game-settings-button3").click(function() {
 		var text = $(".create-game-settings-button3").html();
 		$(".main-settings-heading").text(text);
+		$(".game-info-settings").css("display", "none");
+		$(".game-settings-settings").css("display", "none");
+		$(".special-settings").css("display", "block");
 	});
 	
 	
-	
+	$(".start").click(function() {
+		
+	});
 	
 	
 });
