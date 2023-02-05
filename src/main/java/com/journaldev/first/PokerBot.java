@@ -2,11 +2,12 @@ package com.journaldev.first;
 import java.util.*;
 
 
-public class PokerBot{
+public class PokerBot implements Comparable<PokerBot>{
    private String firstCard;
    private String secondCard;
    private int chips;
    private int bestHand;
+   private String bestHandString;
    private String name;
    private int handId;
    private ArrayList<Integer> cardList = new ArrayList<Integer>();
@@ -19,6 +20,7 @@ public class PokerBot{
       secondCard = "0";
       chips = PokerMain.startingChips;
       bestHand = 0;
+      bestHandString = "";
       handId = 0;
       name = "bot";
       cardList = emptyArray1;
@@ -29,8 +31,9 @@ public class PokerBot{
       secondCard = "0";
       chips = PokerMain.startingChips;
       bestHand = 0;
+      bestHandString = "";
       handId = 0;
-      name = "bot"+(i+1);
+      name = "bot"+(i);
       cardList = emptyArray1;
    }
    
@@ -43,10 +46,6 @@ public class PokerBot{
    10th and 11th: more 
    */
    
-   public static void main(String args[]) {
-
-   }
-
 //methods for bot data
 
    //returns bots first card
@@ -56,12 +55,31 @@ public class PokerBot{
        // TODO Auto-generated method stub
        return this.name;
    }
+   
+   @Override
+   public int compareTo(PokerBot other) {
+       if (this.getBestHand() < other.getBestHand()) return -1;
+       if (this.getBestHand() > other.getBestHand()) return 1;
+       return 0;
+   }
 
    public void printHandId() {
       System.out.println(this.handId);
    }
+   
+   public Integer getHandId() {
+	   return this.handId;
+   }
 
-   private void setCardList(ArrayList<Integer> a) {
+   public String getBestHandString() {
+	   return this.bestHandString;
+   }
+   
+   public void setBestHandString(String a) {
+	   this.bestHandString = a;
+   }
+   
+   public void setCardList(ArrayList<Integer> a) {
       this.cardList = a;
    }
 
@@ -69,11 +87,13 @@ public class PokerBot{
       return this.cardList;
    }
 
-   public static void makeBots() {
-      for(int i = 0; i < PokerMain.numBots; i++) {
-         PokerBot pB = new PokerBot(i);
+   public static void makeBots(int start, int end) {
+      System.out.println();
+	   for(int i = start; i < end; i++) {
+         PokerBot pB = new PokerBot(i-4);
          PokerMain.b.add(pB);
       }      
+      System.out.println(PokerMain.b);
    } 
    
    public static int getNumBots() {
@@ -98,7 +118,7 @@ public class PokerBot{
    }
    
    //returns the bots best hand in combination with the board
-   public int getBestHand() {
+   public Integer getBestHand() {
       return this.bestHand;
    }
    
@@ -113,12 +133,12 @@ public class PokerBot{
    }
    
    //sets a bots cards
-   private void setCard1(String fC) {
-      firstCard = fC;
+   public void setCard1(String fC) {
+      this.firstCard = fC;
    }
    
-   private void setCard2(String sC) {
-      secondCard = sC;
+   public void setCard2(String sC) {
+      this.secondCard = sC;
    }
    
    //sets a bots chip amount
@@ -126,9 +146,13 @@ public class PokerBot{
       chips = c;
    }
    
+   public String getName() {
+	   return this.name;
+   }
+   
 //seeing what peoples highest hands are  
    public int counter = 0;
-   public ArrayList<Integer> tempList = new ArrayList<Integer>();
+   public static ArrayList<Integer> tempList = new ArrayList<Integer>();
    ArrayList<Integer> list = new ArrayList<Integer>(); 
 
    private void junk(ArrayList<Integer> cardListList) {
@@ -140,7 +164,7 @@ public class PokerBot{
   
    private boolean pair(ArrayList<Integer> cardListList) {
       counter = 0;
-      tempList = cardListList;
+      ArrayList<Integer> tempList = new ArrayList<Integer>(cardListList);
       int pairCard = 0;
       for(int i = 0; i < 7-1; i++) {
          if(getNthDigits(tempList.get(i), 'c') == getNthDigits(tempList.get(i+1), 'c')) {
@@ -164,30 +188,23 @@ public class PokerBot{
    }
    
    private boolean twoPair(ArrayList<Integer> cardListList) {
-      counter = 0;
       tempList = cardListList;
       list.clear();
       ArrayList<Integer> list2 = new ArrayList<Integer>();
       for(int i = 0; i < 6; i++) {
          if(getNthDigits(tempList.get(i), 'c') == getNthDigits(tempList.get(i+1), 'c')) {
-            if(counter == 0) {
-               counter++;
-            }
-            counter++;
-            } else if(counter == 2){
-               list.add(i);
-               list2.add(getNthDigits(tempList.get(i), 'c'));
-               counter = 0;
-            } else {
-               counter = 0;
-            }
+        	 list.add(i);
+        	 list.add(i+1);
+             list2.add(getNthDigits(tempList.get(i), 'c'));
+        } 
       }
       
          if(list2.size() >= 2) {
-            tempList.remove(list.get(1)+1);
-            tempList.remove(list.get(1));
-            tempList.remove(list.get(0)+1);
-            tempList.remove(list.get(0));
+            tempList.remove(list.get(3) + 0);
+            tempList.remove(list.get(2) + 0);
+            tempList.remove(list.get(1) + 0);
+            tempList.remove(list.get(0) + 0);
+            System.out.println(tempList);
             this.createHandId(0, 0, list2.get(0), list2.get(1), getNthDigits(tempList.get(0), 'c'));
             return true;
          }
@@ -222,20 +239,27 @@ public class PokerBot{
    
    private boolean straight(ArrayList<Integer> cardListList) {
       counter = 0;
-      for(int i = 0; i < 7-1; i++) {
-            if((getNthDigits(cardListList.get(i), 'c') == (getNthDigits(cardListList.get(i+1), 'c') - 1))) {
+      
+      ArrayList<Integer > tempListDif = new ArrayList<Integer>(cardListList);
+      for(int i = tempListDif.size()-1; i >= 1; i--) {
+    	  if((getNthDigits(tempListDif.get(i), 'c')) == (getNthDigits(tempListDif.get(i-1), 'c'))) {
+    		  tempListDif.remove(i);
+    	  }
+      }
+      for(int i = 0; i < tempListDif.size()-1; i++) {
+            if(getNthDigits(tempListDif.get(i), 'c') == (getNthDigits(tempListDif.get(i+1), 'c') + 1)) {
                if(counter == 0) {
                   counter++;
                }
                counter++;
                if(counter == 5) {
-                  this.createHandId(getNthDigits(cardListList.get(i-3), 'c'));
+                  this.createHandId(getNthDigits(tempListDif.get(i-3), 'c'));
                   return true;
+               }
             } else {
                counter = 0;
             }
-         }
-      } 
+         } 
       return false;
    }
    
@@ -283,6 +307,9 @@ public class PokerBot{
    
    private boolean fullHouse(ArrayList<Integer> cardListList) {
       boolean a = false;
+      boolean b = false;
+      int indexa = 0;
+      int indexb = 0;
       counter = 0;
       list.clear();
       ArrayList<Integer> list2 = new ArrayList<Integer>();
@@ -292,36 +319,57 @@ public class PokerBot{
                counter++;
             }
             counter++;
-            } else if((counter == 2 && a != true) || counter == 3) {
-                     list.add(counter);
-                     list2.add(i);
-                     counter = 0;
             } else {
-               counter = 0;
-            }
-      } 
-      if(list.size() >= 2){
-         if((list.get(0) == 3) && (list.get(1) == 2)) {
-            this.createHandId(0, 0, 0, getNthDigits(cardListList.get(list2.get(0)), 'c'), getNthDigits(cardListList.get(list2.get(1)), 'c'));
-            return true;
-         } else if((list.get(0) == 2) && (list.get(1) == 3)) {
-            this.createHandId(0, 0, 0, getNthDigits(cardListList.get(list2.get(1)), 'c'), getNthDigits(cardListList.get(list2.get(0)), 'c'));
-            return true;
-         }
+                 list.add(counter);
+                 list2.add(i);
+                 counter = 0;
+            } 
       }
-      return false;
+      for(int i = list.size() - 1; i > 0; i--) {
+    	  if(list.get(i) < 2) {
+    		  list.remove(i);
+    		  list2.remove(i);
+    	  }
+      }
+      for(int i = 0; i < list.size(); i++) {
+    	  if(list.get(i) == 3) {
+    		  a = true;
+    		  indexa = list2.get(i);
+    		  break;
+    	  }
+      }
+      for(int i = 0; i < list.size(); i++) {
+    	  if(list.get(i) == 2) {
+    		  b = true;
+    		  indexb = list2.get(i);
+    		  break;
+    	  }
+      }
+      
+      if(a == false || b == false) {
+    	  return false;
+      }
+	    this.createHandId(0, 0, 0, getNthDigits(cardListList.get(indexa), 'c'), getNthDigits(cardListList.get(indexb), 'c'));
+	    return true;
    }
    
    private boolean straightFlush(ArrayList<Integer> cardListList) {
       counter = 0;
-      for(int i = 0; i < 7-1; i++) {
-            if((getNthDigits(cardListList.get(i), 'c') == getNthDigits(cardListList.get(i+1), 'c') + 1 && (getNthDigits(cardListList.get(i), 's') == getNthDigits(cardListList.get(i+1), 's')))) {
+      
+      ArrayList<Integer > tempListDif = new ArrayList<Integer>(cardListList);
+      for(int i = tempListDif.size()-1; i >= 1; i--) {
+    	  if((getNthDigits(tempListDif.get(i), 'c')) == (getNthDigits(tempListDif.get(i-1), 'c'))) {
+    		  tempListDif.remove(i);
+    	  }
+      }
+      for(int i = 0; i < tempListDif.size() - 1; i++) {
+            if((getNthDigits(tempListDif.get(i), 'c') == getNthDigits(tempListDif.get(i+1), 'c') + 1 && (getNthDigits(tempListDif.get(i), 's') == getNthDigits(tempListDif.get(i+1), 's')))) {
                if(counter == 0) {
                   counter++;
                }
                counter++;
                if(counter == 5) {
-                  this.createHandId(getNthDigits(cardListList.get(i-3), 'c'));
+                  this.createHandId(getNthDigits(tempListDif.get(i-3), 'c'));
                   return true;
             } 
          } 
@@ -390,34 +438,44 @@ public class PokerBot{
    public static void checkHand(int i, ArrayList<Integer> cardListList) {
       if(PokerMain.b.get(i).royalFlush(cardListList) == true) {
          PokerMain.b.get(i).setBestHand(9);
+         PokerMain.b.get(i).setBestHandString("Royal Flush");
          System.out.println("Bot has royal flush");
       } else if (PokerMain.b.get(i).fourOfKind(cardListList) == true) {
          PokerMain.b.get(i).setBestHand(8);
+         PokerMain.b.get(i).setBestHandString("Four Of A Kind");
          System.out.println("Bot has four of a kind");
       } else if (PokerMain.b.get(i).straightFlush(cardListList) == true) {
          PokerMain.b.get(i).setBestHand(7);
+         PokerMain.b.get(i).setBestHandString("Straight Flush");
          System.out.println("Bot has straight flush");
       } else if (PokerMain.b.get(i).fullHouse(cardListList) == true) {
          PokerMain.b.get(i).setBestHand(6);
+         PokerMain.b.get(i).setBestHandString("Full House");
          System.out.println("Bot has full house");
       } else if (PokerMain.b.get(i).flush(cardListList) == true) {
          PokerMain.b.get(i).setBestHand(5);
+         PokerMain.b.get(i).setBestHandString("Flush");
          System.out.println("Bot has flush");
       } else if (PokerMain.b.get(i).straight(cardListList) == true) {
          PokerMain.b.get(i).setBestHand(4);
+         PokerMain.b.get(i).setBestHandString("Straight");
          System.out.println("Bot has straight");
       } else if (PokerMain.b.get(i).threeOfKind(cardListList) == true) {
          PokerMain.b.get(i).setBestHand(3);
+         PokerMain.b.get(i).setBestHandString("Three Of A Kind");
          System.out.println("Bot has three of a kind");
       } else if (PokerMain.b.get(i).twoPair(cardListList) == true) {
          PokerMain.b.get(i).setBestHand(2);
+         PokerMain.b.get(i).setBestHandString("Two Pair");
          System.out.println("Bot has two pair");
       }else if (PokerMain.b.get(i).pair(cardListList) == true) {
          PokerMain.b.get(i).setBestHand(1);
+         PokerMain.b.get(i).setBestHandString("Pair");
          System.out.println("Bot has pair");
       } else {
          PokerMain.b.get(i).junk(cardListList);
          PokerMain.b.get(i).setBestHand(0);
+         PokerMain.b.get(i).setBestHandString("Junk");
          System.out.println("Bot has junk");
       }
    }
@@ -440,19 +498,19 @@ public class PokerBot{
    //takes a bots cards and the boards cards and sorts them in descending order
    public ArrayList<Integer> sortCards(Board b1) {
       ArrayList<Integer> activeCards = new ArrayList<Integer>();
-      ArrayList<String> temp2 = new ArrayList<String>();
-      temp2.addAll(b1.getAllIntBoardCards());
-      temp2.add(this.firstCard);
-      temp2.add(this.secondCard);
+      ArrayList<String> totalCardList = new ArrayList<String>();
+      totalCardList.addAll(b1.getAllBoardCards());
+      totalCardList.add(this.getCard1());
+      totalCardList.add(this.getCard2());
       for(int j = 0; j < 7; j++) {
-         if((temp2.get(j).substring(0, 1).equals("1")) && !(temp2.get(j).substring(0, 2).equals("10"))) {
-            temp2.set(j, "14" + temp2.get(j).substring(1, 2));
-         } else if(temp2.get(j).substring(0,1).equals("J")) {
-            temp2.set(j, "11" + temp2.get(j).substring(1,2));
-         } else if (temp2.get(j).substring(0,1).equals("Q")) {
-            temp2.set(j, "12" + temp2.get(j).substring(1,2));
-         } else if (temp2.get(j).substring(0,1).equals("K")) {
-            temp2.set(j, "13" + temp2.get(j).substring(1,2));
+         if((totalCardList.get(j).substring(0, 1).equals("1")) && !(totalCardList.get(j).substring(0, 2).equals("10"))) {
+            totalCardList.set(j, "14" + totalCardList.get(j).substring(1, 2));
+         } else if(totalCardList.get(j).substring(0,1).equals("J")) {
+            totalCardList.set(j, "11" + totalCardList.get(j).substring(1,2));
+         } else if (totalCardList.get(j).substring(0,1).equals("Q")) {
+            totalCardList.set(j, "12" + totalCardList.get(j).substring(1,2));
+         } else if (totalCardList.get(j).substring(0,1).equals("K")) {
+            totalCardList.set(j, "13" + totalCardList.get(j).substring(1,2));
          }
          
       }
@@ -460,15 +518,15 @@ public class PokerBot{
       int b;
       String c;
       for(int i = 0; i < 7; i++) {
-         if(temp2.get(i).length() == 3) {
-            c = temp2.get(i);
+         if(totalCardList.get(i).length() == 3) {
+            c = totalCardList.get(i);
             b = Integer.valueOf(c.substring(0, 2));
             a = convertSuitToNum(c.charAt(2));
             c = "" + b + a;
             a = Integer.parseInt(c);
             activeCards.add(a);
          } else {
-            c  = temp2.get(i);
+            c  = totalCardList.get(i);
             b = Integer.valueOf(c.substring(0, 1));
             a = convertSuitToNum(c.charAt(1));
             c = "" + b + a;
@@ -482,12 +540,12 @@ public class PokerBot{
       return activeCards;
    }
  
-   public static ArrayList<PokerBot> getBestHands() {
+   public static void getBestHands() {
       ArrayList<ArrayList<Integer>> sortedCards = new ArrayList<ArrayList<Integer>>();
       ArrayList<Integer> handNumList = new ArrayList<Integer>();
       ArrayList<PokerBot> bestHandsList = new ArrayList<PokerBot>();
       int bestHand = 0;
-      for(int i = 0; i < PokerMain.b.size(); i++) {
+      for(int i = 0; i < PokerServlet.numBots; i++) {
          sortedCards.add(PokerMain.b.get(i).sortCards(Board.b1));
          checkHand(i, sortedCards.get(i));
          handNumList.add(PokerMain.b.get(i).getBestHand());
@@ -502,11 +560,11 @@ public class PokerBot{
          } 
       }
 
-      return bestHandsList;
+      //return bestHandsList;
    }
 
 
-   private static String convertToFaceCard(String card) {
+   public static String convertToFaceCard(String card) {
       if(card.charAt(0) == '1' && card.charAt(1) == '1')  {
          return "J" + card.charAt(2);
       } else if (card.charAt(0) == '1' && card.charAt(1) == '2') {
@@ -516,7 +574,7 @@ public class PokerBot{
       }
       return card;
    }
-   
+  /* 
    public static void giveCards(Board b1) {
       for(int i = 0; i < PokerMain.numBots; i++){
          int num = (int)(Math.random() * (52 - Board.cardsInPlay));
@@ -532,6 +590,7 @@ public class PokerBot{
          Board.cardsInPlay += 1;
       }
    }
+   */
    
    private void createHandId(int highCard, int secondHighCard, int thirdHighCard, int fourthHighCard, int fifthHighCard) {
       int id = 0;
