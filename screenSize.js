@@ -1,5 +1,5 @@
+//resizes the width and height of the website based on the dimensions of the window
 $(document).ready(function() {
-	$(document).ready(function(){
 	$(".table").css("height", $(window).height());
 	$(".table").css("width", $(window).width());
 	
@@ -9,12 +9,18 @@ $(document).ready(function() {
 	$(".main-container-for-game").css("height", $(window).height());
 	$(".main-container-for-game").css("width", $(window).width());
 	
+	$(".main-create").css("height", $(window).height());
+	$(".main-create").css("width", $(window).width());
+	
 	$("#main-container").css("height", $(window).height());
 	$("#main-container").css("width", $(window).width());
 	
 	$(".table-image").css("height", $(window).height());
 	$(".table-image").css("width", $(window).width());
-	});
+	
+	$(".landing-body").css("height", $(window).height());
+	$(".landing-body").css("width", $(window).width());
+	
 	var width1 = $(window).width();
 	var height1 = $(window).height();
 	$(window).resize(function() {
@@ -35,6 +41,9 @@ $(document).ready(function() {
 			
 			$(".table-image").css("height", .94*(width/2));
 			$(".table-image").css("width", width);
+			
+			$(".main-create").css("height", .94*(width/2));
+			$(".main-create").css("width", width);
 		}
 		if(height != height1) {
 			$(".table").css("height", height);
@@ -51,6 +60,9 @@ $(document).ready(function() {
 			
 			$(".table-image").css("height", height);
 			$(".table-image").css("width", (height*2)/.94);
+			
+			$(".main-create").css("height", height);
+			$(".main-create").css("width", (height*2)/.94);
 		}
 		
 		width1 = width;
